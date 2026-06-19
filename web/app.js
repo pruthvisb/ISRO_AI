@@ -672,7 +672,7 @@ function showResults() {
     
     let rank = "Novice Stargazer";
     if (quizScore === 3) {
-        rank = "Antigravity Astrophysicist 🚀";
+        rank = "AstroPulse Astrophysicist 🚀";
     } else if (quizScore === 2) {
         rank = "Solar System Vetting Specialist 🔭";
     } else if (quizScore === 1) {
