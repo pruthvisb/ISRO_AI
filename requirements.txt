@@ -9,5 +9,6 @@ astroquery>=0.4.6
 scikit-learn>=1.2.0
 xgboost>=1.7.0
 lightgbm>=3.3.0
+torch>=2.0.0
 streamlit>=1.22.0
 jinja2>=3.0.0
