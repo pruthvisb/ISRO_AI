@@ -10,10 +10,6 @@
     --accent-gold: #f59e0b;
     --accent-red: #ef4444;
     --accent-green: #10b981;
-    --google-blue: #4285f4;
-    --google-red: #ea4335;
-    --google-yellow: #fbbc05;
-    --google-green: #34a853;
 }
 
 /* Reset and Global Styles */
@@ -98,11 +94,6 @@ h1, h2, h3, .logo {
     font-weight: 700;
     letter-spacing: -0.5px;
 }
-
-.g-blue { color: var(--google-blue); }
-.g-red { color: var(--google-red); }
-.g-yellow { color: var(--google-yellow); }
-.g-green { color: var(--google-green); }
 
 .brand-sub {
     font-weight: 300;
