@@ -196,10 +196,6 @@ updateMetrics();
 
 // Main physics step
 function updateSimulation() {
-    simTime += 0.05; // increment time
-    
-// Main physics step
-function updateSimulation() {
     if (!isPlaying) return; // pause logic
 
     simTime += 0.05; // increment time
