@@ -755,73 +755,142 @@ footer {
     100% { transform: scale(1); }
 }
 
-/* Vertical Timeline / Tree Structure */
-.pipeline-tree {
+/* Branching Tree Structure Styles */
+.pipeline-tree-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     position: relative;
-    max-width: 900px;
-    margin: 0 auto;
     padding: 2rem 0;
 }
 
-.tree-line {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--accent-blue), var(--accent-cyan));
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.tree-node {
-    position: relative;
-    width: 50%;
-    padding: 1.5rem 3rem;
-    box-sizing: border-box;
+.tree-level {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     z-index: 2;
 }
 
-.tree-node.left {
-    left: 0;
-    text-align: right;
-}
-
-.tree-node.right {
-    left: 50%;
-    text-align: left;
-}
-
-.tree-dot {
-    position: absolute;
-    top: 2.75rem;
-    width: 16px;
-    height: 16px;
-    background: var(--accent-cyan);
-    border: 3px solid var(--bg-dark);
-    border-radius: 50%;
-    box-shadow: 0 0 12px var(--accent-cyan);
-    z-index: 3;
-}
-
-.tree-node.left .tree-dot {
-    right: -8px;
-}
-
-.tree-node.right .tree-dot {
-    left: -8px;
-}
-
-.node-content {
+.tree-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
     padding: 2rem;
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.tree-node.left .node-content {
-    transform-origin: right center;
+.tree-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.tree-node.right .node-content {
-    transform-origin: left center;
+.tree-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+    color: #ffffff;
+}
+
+.tree-card p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+/* Connectors */
+.tree-connector.vertical {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent-blue), var(--accent-cyan));
+    z-index: 1;
+}
+
+.tree-branches {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Horizontal connecting bar for branches */
+.tree-branches::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 22%;
+    right: 22%;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-cyan));
+    z-index: 1;
+}
+
+.tree-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 44%;
+    position: relative;
+    padding-top: 30px;
+}
+
+/* Vertical branch entries */
+.tree-branch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 30px;
+    background: var(--accent-cyan);
+    z-index: 1;
+}
+
+/* Merge connector under two branches */
+.tree-connector.merge-down {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.tree-connector.merge-down::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 22%;
+    right: 22%;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-cyan));
+}
+
+.tree-connector.merge-down::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: var(--accent-cyan);
+    transform: translate(-50%, -100%);
+}
+
+.tree-branch::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    width: 2px;
+    height: 30px;
+    background: var(--accent-blue);
+    z-index: 1;
 }
 
 /* Scroll Reveal Animations */
@@ -831,37 +900,48 @@ footer {
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tree-node.left.reveal {
-    transform: translateX(-40px);
+.level-root.reveal {
+    transform: translateY(30px);
 }
 
-.tree-node.right.reveal {
-    transform: translateX(40px);
+.tree-branches.reveal .left {
+    transform: translateX(-30px);
 }
 
-.reveal.visible {
-    opacity: 1;
+.tree-branches.reveal .right {
+    transform: translateX(30px);
+}
+
+.reveal.visible, .reveal.visible .tree-branch {
+    opacity: 1 !important;
     transform: translate(0) !important;
 }
 
-/* Responsive adjustments for Tree */
+/* Responsive tree layout - collapses into vertical timeline on mobile */
 @media (max-width: 768px) {
-    .tree-line {
-        left: 30px;
+    .tree-branches {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
     }
-    .tree-node {
+    .tree-branches::before {
+        display: none;
+    }
+    .tree-branch {
         width: 100%;
-        left: 0 !important;
-        padding-left: 5rem;
-        padding-right: 1.5rem;
-        text-align: left !important;
+        padding-top: 0;
     }
-    .tree-dot {
-        left: 22px !important;
-        right: auto !important;
+    .tree-branch::before, .tree-branch::after {
+        display: none;
     }
-    .tree-node.left.reveal, .tree-node.right.reveal {
-        transform: translateY(30px);
+    .tree-connector {
+        display: none;
+    }
+    .tree-level {
+        margin: 1.5rem 0;
+    }
+    .tree-card {
+        max-width: 100%;
     }
 }
 

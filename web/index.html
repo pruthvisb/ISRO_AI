@@ -63,56 +63,77 @@
         <p class="section-subtitle">How raw stellar data is ingested, cleaned, analyzed, and classified by the Google
             Antigravity AI engine.</p>
         
-        <div class="pipeline-tree">
-            <div class="tree-line"></div>
-            
-            <div class="tree-node left reveal">
-                <div class="tree-dot"></div>
-                <div class="glass-card node-content">
+        <div class="pipeline-tree-wrapper">
+            <!-- Root Node -->
+            <div class="tree-level level-root reveal">
+                <div class="glass-card tree-card root-card">
                     <div class="card-icon"><i class="fa-solid fa-download"></i></div>
-                    <h3>1. Data Acquisition</h3>
-                    <p>Ingests full-cadence TESS light curves from the MAST Archive, querying the TESS Input Catalog (TIC)
-                        to compile target fluxes.</p>
+                    <h3>1. Raw Data Ingestion</h3>
+                    <p>Queries TESS Input Catalog (TIC) & MAST Archive to retrieve light curve fluxes.</p>
                 </div>
             </div>
-
-            <div class="tree-node right reveal">
-                <div class="tree-dot"></div>
-                <div class="glass-card node-content">
-                    <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <h3>2. Preprocessing</h3>
-                    <p>Performs sigma-clipping outlier removal and applies a rolling Savitzky-Golay filter to isolate and
-                        flatten stellar variability.</p>
+            
+            <!-- Connector Line -->
+            <div class="tree-connector vertical reveal"></div>
+            
+            <!-- Level 2: Two Branches -->
+            <div class="tree-branches reveal">
+                <div class="tree-branch left">
+                    <div class="glass-card tree-card branch-card">
+                        <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h3>2A. Stellar Processing</h3>
+                        <p>Removes NaNs, clips outliers at 3&sigma;, and fits a Savitzky-Golay trend to flatten pulsations.</p>
+                    </div>
+                </div>
+                <div class="tree-branch right">
+                    <div class="glass-card tree-card branch-card">
+                        <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h3>2B. Orbit Detection</h3>
+                        <p>Runs Box Least Squares (BLS) period search and phase-folds light curves relative to t0.</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="tree-node left reveal">
-                <div class="tree-dot"></div>
-                <div class="glass-card node-content">
-                    <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h3>3. Transit Detection</h3>
-                    <p>Runs a Box Least Squares (BLS) periodogram search, identifying orbital periods, transiting durations,
-                        depths, and SNR.</p>
-                </div>
-            </div>
-
-            <div class="tree-node right reveal">
-                <div class="tree-dot"></div>
-                <div class="glass-card node-content">
+            
+            <!-- Connector Line (Merge & Split) -->
+            <div class="tree-connector merge-down reveal"></div>
+            
+            <!-- Level 3: Feature Extraction -->
+            <div class="tree-level reveal">
+                <div class="glass-card tree-card mid-card">
                     <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
-                    <h3>4. Feature Engineering</h3>
-                    <p>Extracts statistical moments (skewness, kurtosis), odd-even depth differences, and folds light curves
-                        into fixed 200-bin vectors.</p>
+                    <h3>3. Feature Engineering</h3>
+                    <p>Extracts statistical moments, odd-even differences, and creates 200-bin folded profiles.</p>
                 </div>
             </div>
-
-            <div class="tree-node left reveal">
-                <div class="tree-dot"></div>
-                <div class="glass-card node-content">
-                    <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-                    <h3>5. Ensemble Inference</h3>
-                    <p>Feeds tabular parameters into RF, XGBoost, and LightGBM models, while deep CNN-LSTM hybrids process
-                        the folded 1D profiles.</p>
+            
+            <div class="tree-connector vertical reveal"></div>
+            
+            <!-- Level 4: Model Ensembles (Split again!) -->
+            <div class="tree-branches reveal">
+                <div class="tree-branch left">
+                    <div class="glass-card tree-card model-group-card">
+                        <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
+                        <h3>4A. Tabular Ensemble</h3>
+                        <p>Trains Random Forest, XGBoost, and LightGBM models on statistical metadata.</p>
+                    </div>
+                </div>
+                <div class="tree-branch right">
+                    <div class="glass-card tree-card model-group-card">
+                        <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>4B. Deep Learning</h3>
+                        <p>Deploys PyTorch 1D CNN and CNN-LSTM models on phase-folded vectors.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tree-connector merge-down reveal"></div>
+            
+            <!-- Level 5: Consensus Leaf -->
+            <div class="tree-level reveal">
+                <div class="glass-card tree-card leaf-card">
+                    <div class="card-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <h3>5. Ensemble Consensus</h3>
+                    <p>Averages probabilities from all five models to calculate the final exoplanet confidence score (0-100%).</p>
                 </div>
             </div>
         </div>
