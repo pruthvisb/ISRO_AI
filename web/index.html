@@ -57,44 +57,63 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Pipeline Section -->
+    </section>    <!-- Pipeline Section -->
     <section id="pipeline" class="section">
         <h2 class="section-title">The Scientific Discovery Pipeline</h2>
         <p class="section-subtitle">How raw stellar data is ingested, cleaned, analyzed, and classified by the Google
             Antigravity AI engine.</p>
+        
+        <div class="pipeline-tree">
+            <div class="tree-line"></div>
+            
+            <div class="tree-node left reveal">
+                <div class="tree-dot"></div>
+                <div class="glass-card node-content">
+                    <div class="card-icon"><i class="fa-solid fa-download"></i></div>
+                    <h3>1. Data Acquisition</h3>
+                    <p>Ingests full-cadence TESS light curves from the MAST Archive, querying the TESS Input Catalog (TIC)
+                        to compile target fluxes.</p>
+                </div>
+            </div>
 
-        <div class="pipeline-grid">
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-download"></i></div>
-                <h3>1. Data Acquisition</h3>
-                <p>Ingests full-cadence TESS light curves from the MAST Archive, querying the TESS Input Catalog (TIC)
-                    to compile target fluxes.</p>
+            <div class="tree-node right reveal">
+                <div class="tree-dot"></div>
+                <div class="glass-card node-content">
+                    <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>2. Preprocessing</h3>
+                    <p>Performs sigma-clipping outlier removal and applies a rolling Savitzky-Golay filter to isolate and
+                        flatten stellar variability.</p>
+                </div>
             </div>
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                <h3>2. Preprocessing</h3>
-                <p>Performs sigma-clipping outlier removal and applies a rolling Savitzky-Golay filter to isolate and
-                    flatten stellar variability.</p>
+
+            <div class="tree-node left reveal">
+                <div class="tree-dot"></div>
+                <div class="glass-card node-content">
+                    <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h3>3. Transit Detection</h3>
+                    <p>Runs a Box Least Squares (BLS) periodogram search, identifying orbital periods, transiting durations,
+                        depths, and SNR.</p>
+                </div>
             </div>
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                <h3>3. Transit Detection</h3>
-                <p>Runs a Box Least Squares (BLS) periodogram search, identifying orbital periods, transiting durations,
-                    depths, and SNR.</p>
+
+            <div class="tree-node right reveal">
+                <div class="tree-dot"></div>
+                <div class="glass-card node-content">
+                    <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>4. Feature Engineering</h3>
+                    <p>Extracts statistical moments (skewness, kurtosis), odd-even depth differences, and folds light curves
+                        into fixed 200-bin vectors.</p>
+                </div>
             </div>
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
-                <h3>4. Feature Engineering</h3>
-                <p>Extracts statistical moments (skewness, kurtosis), odd-even depth differences, and folds light curves
-                    into fixed 200-bin vectors.</p>
-            </div>
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-                <h3>5. Ensemble Inference</h3>
-                <p>Feeds tabular parameters into RF, XGBoost, and LightGBM models, while deep CNN-LSTM hybrids process
-                    the folded 1D profiles.</p>
+
+            <div class="tree-node left reveal">
+                <div class="tree-dot"></div>
+                <div class="glass-card node-content">
+                    <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3>5. Ensemble Inference</h3>
+                    <p>Feeds tabular parameters into RF, XGBoost, and LightGBM models, while deep CNN-LSTM hybrids process
+                        the folded 1D profiles.</p>
+                </div>
             </div>
         </div>
     </section>

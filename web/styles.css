@@ -755,3 +755,114 @@ footer {
     100% { transform: scale(1); }
 }
 
+/* Vertical Timeline / Tree Structure */
+.pipeline-tree {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.tree-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-blue), var(--accent-cyan));
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.tree-node {
+    position: relative;
+    width: 50%;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.tree-node.left {
+    left: 0;
+    text-align: right;
+}
+
+.tree-node.right {
+    left: 50%;
+    text-align: left;
+}
+
+.tree-dot {
+    position: absolute;
+    top: 2.75rem;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-cyan);
+    border: 3px solid var(--bg-dark);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent-cyan);
+    z-index: 3;
+}
+
+.tree-node.left .tree-dot {
+    right: -8px;
+}
+
+.tree-node.right .tree-dot {
+    left: -8px;
+}
+
+.node-content {
+    padding: 2rem;
+}
+
+.tree-node.left .node-content {
+    transform-origin: right center;
+}
+
+.tree-node.right .node-content {
+    transform-origin: left center;
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tree-node.left.reveal {
+    transform: translateX(-40px);
+}
+
+.tree-node.right.reveal {
+    transform: translateX(40px);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translate(0) !important;
+}
+
+/* Responsive adjustments for Tree */
+@media (max-width: 768px) {
+    .tree-line {
+        left: 30px;
+    }
+    .tree-node {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 5rem;
+        padding-right: 1.5rem;
+        text-align: left !important;
+    }
+    .tree-dot {
+        left: 22px !important;
+        right: auto !important;
+    }
+    .tree-node.left.reveal, .tree-node.right.reveal {
+        transform: translateY(30px);
+    }
+}
+
+

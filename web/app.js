@@ -503,3 +503,20 @@ if (quizQuestionBox) {
     loadQuestion();
 }
 
+// --- SCROLL REVEAL TIMELINE NODES ---
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target); // stop observing once visible
+        }
+    });
+}, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+});
+
+document.querySelectorAll(".reveal").forEach(el => {
+    revealObserver.observe(el);
+});
+
