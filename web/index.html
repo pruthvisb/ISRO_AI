@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics— Exoplanet Intelligence Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Starry Background Animation -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span
+                class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+            <span class="brand-sub">Physics</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#pipeline"><i class="fa-solid fa-network-wired"></i> Pipeline</a>
+            <a href="#simulator"><i class="fa-solid fa-chart-line"></i> Simulator</a>
+            <a href="#quiz"><i class="fa-solid fa-circle-question"></i> Beginner Quiz</a>
+            <a href="#models"><i class="fa-solid fa-brain"></i> ML Architecture</a>
+            <a href="#streamlit" class="btn-primary">Launch Dashboard</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge"><i class="fa-solid fa-user-astronaut"></i> Google Antigravity Labs</div>
+            <h1>AI-Enabled Detection of Exoplanets</h1>
+            <p class="hero-subtitle">Vetting periodic dips in noisy astronomical light curves with advanced Deep
+                Learning and Machine Learning ensembles.</p>
+            <div class="hero-actions">
+                <a href="#simulator" class="btn-secondary">Try Interactive Simulator</a>
+                <a href="#streamlit" class="btn-primary-large">Launch Streamlit App <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="hero-graphic">
+            <div class="orbit-container">
+                <div class="star"></div>
+                <div class="planet-orbit">
+                    <div class="planet"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pipeline Section -->
+    <section id="pipeline" class="section">
+        <h2 class="section-title">The Scientific Discovery Pipeline</h2>
+        <p class="section-subtitle">How raw stellar data is ingested, cleaned, analyzed, and classified by the Google
+            Antigravity AI engine.</p>
+
+        <div class="pipeline-grid">
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-download"></i></div>
+                <h3>1. Data Acquisition</h3>
+                <p>Ingests full-cadence TESS light curves from the MAST Archive, querying the TESS Input Catalog (TIC)
+                    to compile target fluxes.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>2. Preprocessing</h3>
+                <p>Performs sigma-clipping outlier removal and applies a rolling Savitzky-Golay filter to isolate and
+                    flatten stellar variability.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                <h3>3. Transit Detection</h3>
+                <p>Runs a Box Least Squares (BLS) periodogram search, identifying orbital periods, transiting durations,
+                    depths, and SNR.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                <h3>4. Feature Engineering</h3>
+                <p>Extracts statistical moments (skewness, kurtosis), odd-even depth differences, and folds light curves
+                    into fixed 200-bin vectors.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+                <h3>5. Ensemble Inference</h3>
+                <p>Feeds tabular parameters into RF, XGBoost, and LightGBM models, while deep CNN-LSTM hybrids process
+                    the folded 1D profiles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="simulator" class="section dark-bg">
+        <h2 class="section-title">Interactive Transit & Detrending Simulator</h2>
+        <p class="section-subtitle">Simulate exoplanet transits, introduce stellar variability, inject noise, and
+            witness how the Savitzky-Golay filter flattens trends.</p>
+
+        <div class="sim-container">
+            <div class="sim-controls">
+                <div class="control-group">
+                    <label for="planet-size">Planet Radius (Depth): <span id="val-size">1.0%</span></label>
+                    <input type="range" id="planet-size" min="0.2" max="3.0" step="0.1" value="1.0">
+                </div>
+                <div class="control-group">
+                    <label for="orbit-period">Orbital Period (Days): <span id="val-period">4.5 d</span></label>
+                    <input type="range" id="orbit-period" min="2.0" max="10.0" step="0.5" value="4.5">
+                </div>
+                <div class="control-group">
+                    <label for="stellar-var">Stellar Variability (Spots): <span id="val-var">Medium</span></label>
+                    <input type="range" id="stellar-var" min="0" max="3" step="1" value="2">
+                </div>
+                <div class="control-group">
+                    <label for="noise-level">Gaussian Noise Level: <span id="val-noise">Medium</span></label>
+                    <input type="range" id="noise-level" min="0" max="3" step="1" value="1">
+                </div>
+                <div class="toggle-buttons">
+                    <button id="btn-toggle-detrend" class="btn-toggle active">Detrending: ON</button>
+                    <button id="btn-toggle-fold" class="btn-toggle">Fold Light Curve</button>
+                </div>
+            </div>
+            <div class="sim-display">
+                <canvas id="sim-canvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Quiz for Beginners -->
+    <section id="quiz" class="section">
+        <h2 class="section-title">Test Your Exoplanet Knowledge!</h2>
+        <p class="section-subtitle">Are you ready to become an Antigravity Astrophysicist? Take our quick quiz for
+            beginners!</p>
+
+        <div class="quiz-container glass-card">
+            <div id="quiz-question-box">
+                <span class="quiz-progress" id="quiz-progress">Question 1 of 3</span>
+                <h3 id="quiz-question-text">How does an exoplanet transit affect the light curve of a star?</h3>
+
+                <div class="quiz-options" id="quiz-options">
+                    <button class="quiz-opt-btn" data-idx="0">It makes the star look brighter.</button>
+                    <button class="quiz-opt-btn" data-idx="1">It makes the star look dimmer periodically.</button>
+                    <button class="quiz-opt-btn" data-idx="2">It makes the star change color.</button>
+                </div>
+
+                <div class="quiz-feedback-box hidden" id="quiz-feedback">
+                    <p id="quiz-feedback-text">Correct! When a planet passes in front of the star, it blocks a small
+                        fraction of the star's light.</p>
+                </div>
+
+                <div class="quiz-actions">
+                    <button class="btn-primary" id="btn-quiz-next" disabled>Submit Answer</button>
+                </div>
+            </div>
+
+            <!-- Quiz Results (Hidden initially) -->
+            <div id="quiz-result-box" class="hidden">
+                <div class="result-icon"><i class="fa-solid fa-trophy"></i></div>
+                <h3>Quiz Complete!</h3>
+                <p class="result-score-text">Your Score: <span id="quiz-score">0 / 3</span></p>
+                <p id="quiz-rank-desc">Rank: Novice Stargazer</p>
+                <button class="btn-secondary" id="btn-quiz-restart">Try Again</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ML Architectures Section -->
+    <section id="models" class="section">
+        <h2 class="section-title">Machine Learning Architecture</h2>
+        <p class="section-subtitle">Deploying a diverse ensemble of models designed for both tabular metadata and
+            sequence-based phase profiles.</p>
+
+        <div class="models-grid">
+            <div class="glass-card model-card">
+                <div class="model-badge">Tabular</div>
+                <h3>Random Forest</h3>
+                <p>Constructs an ensemble of decision trees over features like skewness, kurtosis, and out-of-transit
+                    noise level, providing high interpretability and feature importance rankings.</p>
+            </div>
+            <div class="glass-card model-card">
+                <div class="model-badge">Tabular</div>
+                <h3>XGBoost</h3>
+                <p>Uses gradient-boosted trees to handle complex non-linear feature relationships, excelling at
+                    separating eclipsing binaries from deep planet candidates.</p>
+            </div>
+            <div class="glass-card model-card">
+                <div class="model-badge">Tabular</div>
+                <h3>LightGBM</h3>
+                <p>Leaf-wise tree growth enables extremely fast training and predictions, acting as the speed-focused
+                    vetting classifier in the tabular ensemble.</p>
+            </div>
+            <div class="glass-card model-card">
+                <div class="model-badge-dl">Deep Learning</div>
+                <h3>1D CNN</h3>
+                <p>Ingests the binned, phase-folded light curve phase vector. Convolutional layers act as spatial shape
+                    matchers to identify U-shaped transits and V-shaped eclipses directly.</p>
+            </div>
+            <div class="glass-card model-card">
+                <div class="model-badge-dl">Deep Learning</div>
+                <h3>CNN-LSTM Hybrid</h3>
+                <p>Pairs feature-extracting 1D CNNs with a Long Short-Term Memory (LSTM) layer to capture sequential
+                    dependencies in phase space, excelling on low SNR signals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="streamlit" class="cta-section">
+        <div class="cta-card">
+            <h2>Ready to search real astronomical data?</h2>
+            <p>Launch the Python computational dashboard powered by Streamlit to download FITS files from TESS, run BLS
+                searches, run Monte Carlo simulations, and run our Google Antigravity trained models.</p>
+            <div class="instructions">
+                <p><strong>To run locally:</strong></p>
+                <code>streamlit run app.py</code>
+            </div>
+            <a href="http://localhost:8501" target="_blank" class="btn-primary-large glow-btn">Launch Streamlit App <i
+                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Google Antigravity Labs. Prepared for Student Research Competition.</p>
+            <div class="footer-links">
+                <a href="#pipeline">Methodology</a>
+                <a href="#simulator">Simulator</a>
+                <a href="#models">ML Models</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
