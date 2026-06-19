@@ -47,6 +47,7 @@ let noiseLevel = 1; // 0, 1, 2, 3
 let detrendOn = true;
 let foldOn = false;
 let isPlaying = true;
+let planetDepth = 0.0106;
 
 // Physics and Simulation variables
 let simTime = 0;
@@ -205,7 +206,7 @@ function updateSimulation() {
     const orbitalPeriodYears = orbitalPeriod / 365.25;
     const a = Math.pow(starMass * Math.pow(orbitalPeriodYears, 2), 1/3); // AU
     const planetRadiusSun = planetRadius * 0.103;
-    const planetDepth = Math.pow(planetRadiusSun / starRadius, 2);
+    planetDepth = Math.pow(planetRadiusSun / starRadius, 2);
     
     // Keplerian transit duration with inclination (impact parameter b)
     // Scale duration by 2.0 for visual clarity in simulation plot
