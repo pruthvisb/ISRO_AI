@@ -21,7 +21,7 @@ from src.visualization import (
 
 # Page Configuration
 st.set_page_config(
-    page_title="Google Antigravity — Exoplanet Intelligence Dashboard",
+    page_title="AstroPulse — Exoplanet Intelligence Dashboard",
     page_icon="🔭",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -166,7 +166,7 @@ st.markdown("""
 # Render Header
 st.markdown("""
 <div class="header-container">
-    <div class="header-logo"><i class="fa-solid fa-user-astronaut"></i> Google <span class="brand">Antigravity</span> Labs</div>
+    <div class="header-logo"><i class="fa-solid fa-user-astronaut"></i> AstroPulse <span class="brand">Exoplanet</span> Labs</div>
     <div class="header-title">Exoplanet Intelligence Dashboard</div>
     <div class="header-subtitle">Vetting orbital transits in noisy light curves with Deep Learning and Machine Learning ensembles</div>
 </div>
@@ -301,7 +301,7 @@ if raw_time is not None and raw_flux is not None:
         <div class="status-card status-warning">
             <strong>⚠️ MAST Archive Connection Offline / Rate Limited</strong><br>
             Could not retrieve raw FITS for <strong>{preset_target_name}</strong> (TIC {tic_id}) from MAST. 
-            To demonstrate the pipeline, the Google Antigravity Simulator has generated a high-fidelity physical model of the target.
+            To demonstrate the pipeline, the AstroPulse Simulator has generated a high-fidelity physical model of the target.
         </div>
         """, unsafe_allow_html=True)
     else:

@@ -1,6 +1,6 @@
 # Technical Report: AI-Enabled Detection of Exoplanets from Noisy Astronomical Light Curves
 
-**Author:** Google Antigravity Research Group  
+**Author:** AstroPulse Exoplanet Research Group  
 **Project Classification:** Student Research Competition Entry  
 
 ---

@@ -3,7 +3,7 @@
 This repository contains a complete, end-to-end AI-enabled pipeline for detecting and classifying exoplanet transit signals from noisy stellar light curves. The project is designed as an interactive research demonstration suitable for science competitions and university research.
 
 It features:
-1. **Google Antigravity Portal**: A premium HTML/CSS/JS presentation website featuring a physics-based, real-time exoplanet transit simulator.
+1. **AstroPulse Web Portal**: A premium HTML/CSS/JS presentation website featuring a physics-based, real-time exoplanet transit simulator.
 2. **Streamlit Science Dashboard**: An interactive application that downloads real TESS light curves, applies preprocessing filters, runs periodogram searches, fits parameters, runs Monte Carlo error analyses, and classifies signals using machine learning.
 3. **ML Ensemble Pipeline**: A combination of tabular models (Random Forest, XGBoost, LightGBM) and deep learning models (1D CNN, CNN-LSTM Hybrid in PyTorch) to distinguish exoplanets from false positives (eclipsing binaries, starspots, stellar blends, and instrumental noise).
 
@@ -35,7 +35,7 @@ d:/trial/
 │   ├── confidence.py        # Monte Carlo parameter uncertainty estimation
 │   └── visualization.py     # High-fidelity astronomical plotting utilities
 │
-├── web/                     # Landing page website (branded under Google Antigravity)
+├── web/                     # Landing page website (AstroPulse Exoplanet Labs)
 │   ├── index.html
 │   ├── styles.css
 │   └── app.js
@@ -63,7 +63,7 @@ d:/trial/
 
 ## How to Run
 
-### 1. Launch the Google Antigravity Presentation Web Portal
+### 1. Launch the AstroPulse Presentation Web Portal
 Open the file [web/index.html](file:///d:/trial/web/index.html) directly in any modern web browser, or serve it locally using a simple HTTP server:
 ```bash
 python -m http.server 8000 --directory web
@@ -96,4 +96,19 @@ This opens the dashboard in your browser (usually at `http://localhost:8501`).
 The pipeline uses two data representations:
 - **Tabular Features**: Ingested by Random Forest, XGBoost, and LightGBM. Includes metrics like skewness, kurtosis, local high-frequency noise, BLS SNR, odd-even depth differences (to detect eclipsing binaries), and secondary eclipse depths.
 - **Phase Profiles (1D Array)**: Binned folded light curves (200 bins) ingested by a 1D Convolutional Neural Network (CNN) and a CNN-LSTM Hybrid model built with PyTorch. These models identify the physical "U-shape" signature of transits.
-- **Ensemble consensus**: Averaged class probabilities from all five models determine the final classification and confidence score.
+- **Ensemble Consensus**: Averaged class probabilities from all five models determine the final classification and confidence score.
+
+---
+
+## Science and Architecture Guide
+
+For a detailed scientific and architectural overview, check out the **[AstroPulse Science & Architecture Guide](docs/scientific_guide.md)**.
+
+It includes explanations of:
+- **Transit Photometry Principles**: Formulas for transit depth ($\delta$), Keplerian orbital distance ($a$), and duration ($t_d$).
+- **Stellar Limb Darkening**: How temperature alters transit light curve profiles.
+- **Preprocessing Pipeline**: Outlier removal and Savitzky-Golay detrending filters.
+- **Machine Learning & PyTorch Deep Learning Ensemble**: Detailed layers and consensus logic.
+- **Dynamic Physics Diagrams**:
+  - **[Exoplanet Transit Photometry Infographic](assets/exoplanet_transit_infographic.png)**
+  - **[AI Pipeline Architecture Flowchart](assets/ai_pipeline_architecture.png)**
